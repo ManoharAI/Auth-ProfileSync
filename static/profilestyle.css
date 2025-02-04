@@ -1,0 +1,222 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Profile Section */
+.profile-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    background: #d2d0d0;
+    box-shadow: 10px 19px 26px rgba(0, 0, 0, 0.616);
+    border-radius: 38px;
+    padding: 20px;
+}
+
+.left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-pic {
+    position: relative;
+    width: 250px; /* Adjust size as needed */
+    height: 250px; /* Adjust size as needed */
+    border-radius: 20%;
+    /*overflow: hidden;*/
+    object-fit: cover;
+    border: 5px solid #007bff;
+    margin-bottom: 15px;
+}
+
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20%;
+}
+
+.camera-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.779);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.camera-icon:hover {
+    background-color: rgba(54, 157, 7, 0.9);
+}
+
+#upload-input {
+    display: none; /* Hide the default file input */
+}
+
+.btn-save {
+    display: none; /* Initially hidden */
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-save:hover {
+    background-color: #033006;
+}
+
+/*.profile-pic img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #007bff;
+    margin-bottom: 10px;
+}
+
+.profile-pic input {
+    display: block;
+    margin: 10px auto;
+    font-size: 14px;
+}
+
+.profile-pic button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-pic button:hover {
+    background-color: #0056b3;
+}*/
+
+.user-details h2 {
+    font-size: 35px;
+    color: #007bff;
+    margin-bottom: 5px;
+}
+
+.user-details p {
+    font-size: 19px;
+    margin: 2px 0;
+}
+
+.right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-status {
+    text-align: center;
+    font-size: 20px;
+    color: #555;
+}
+
+.login-status h3 {
+    font-size: 28px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Tasks Section */
+.tasks-section {
+    background: #fff;
+    box-shadow: 0 14px 16px rgba(0, 0, 0, 0.393);
+    border-radius: 8px;
+    padding: 40px;
+}
+
+.tasks-section h2 {
+    font-size: 22px;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.tasks-section table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+.tasks-section th, .tasks-section td {
+    border: 2px solid #dddbdb;
+    padding: 10px;
+    text-align: center;
+}
+
+.tasks-section th {
+    background-color: #1063bb;
+    color: rgb(215, 214, 214);
+    font-weight: bold;
+}
+
+.tasks-section tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+.tasks-section tr:hover {
+    background-color: #d3cccc;
+}
+
+.tasks-section a {
+    color: #007bff;
+    text-decoration:none;
+}
+
+.tasks-section a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-section {
+        flex-direction: column;
+    }
+
+    .left, .right {
+        width: 100%;
+    }
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Schedule | @Scihubss</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='backend_styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <form method="POST" action="{{ url_for('task_schedule') }}" enctype="multipart/form-data">
+            <div class="card">
+                <a class="login">Task Schedule</a>
+
+                <!--Flash Message Block-->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="flash {{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <!-- Name input -->
+                <div class="inputBox">
+                    <input type="text" name="name" required="required">
+                    <span class="user">Name <i class='bx bxs-user'></i></span>
+                </div>
+
+                <div class="flex-container">
+                    <!-- "From" input with label at the top -->
+                    <div class="inputBox labelTop">
+                        <label for="from_date">From:</label>
+                        <input type="datetime-local" id="from_date" name="from_date" required="required">
+                    </div>
+
+                    <!-- "To" input with label at the top -->
+                    <div class="inputBox labelTop">
+                        <label for="to_date">To:</label>
+                        <input type="datetime-local" id="to_date" name="to_date" required="required">
+                    </div>
+                </div>
+
+                <div class="flex-container">
+                    <!-- Flex container for Department -->
+                    <div class="inputBox">
+                        <select id="departmentInput" name="department" required="required" onchange="showDesignation()">
+                            <option value=""></option>
+                            <option value="Technical Department">Technical Department</option>
+                            <option value="Non-Technical Department">Non-Technical Department</option>
+                        </select>
+                        <span>Department</span>
+                    </div>
+
+                    <!-- Designation input below Department -->
+                    <div class="inputBox" id="designationBox">
+                        <select name="designation" id="designation" required="required">
+                        </select>
+                        <span>Designation</span>
+                    </div>
+                </div>
+
+                <!-- Task input with datalist -->
+                <div class="inputBox">
+                    <select id="tasks" name="tasks" required="required">
+                        <option value =""></option>
+                        <option value="Today's Task">Today's Task</option>
+                        <option value="Weekly Task">Weekly Task</option>
+                        <option value="Monthly Task">Monthly Task</option>
+                    </select>
+                    <span>Task</span>
+                </div>
+
+                <!-- "Work Description" input with label at the top -->
+                <div class="inputBox labelTop">
+                    <label for="workDescription">Work Description:</label>
+                    <textarea id="workDescription" name="workDescription" rows="5" style="resize: vertical;"> This outlines the work I have accomplished during this period.</textarea>
+                </div>
+
+                <!-- File upload input -->
+                <div class="inputBox labelTop">
+                    <label for="fileUpload">Upload Document (optional)</label>
+                    <input type="file" id="fileUpload" name="fileUpload" accept=".pdf, .doc, .docx, .xls, .xlsx">
+                </div>
+
+                <button type="submit" class="enter">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function showDesignation() {
+            var department = document.getElementById("departmentInput").value;
+            var designationBox = document.getElementById("designationBox");
+            var designationSelect = document.getElementById("designation");
+
+            designationSelect.innerHTML = '<option value=""></option>'; // Clear previous options
+
+            //Update options based on department selection
+            if (department === "Technical Department") {
+                const roles = ["Software Engineer", "Data Scientist", "DevOps Engineer", "System Administrator", "RTL", "Physical Design"];
+                roles.forEach(role => {
+                    const option = new Option(role, role);
+                    designationSelect.add(option);
+                });
+                designationBox.style.display = "block"; // Show Designation input
+            } else if (department === "Non-Technical Department") {
+                const roles = ["HR Manager", "Marketing Specialist", "Sales Executive", "Account Analyst", "Talent Acquisition", "Content Writer"];
+                roles.forEach(role => {
+                    const option = new Option(role, role);
+                    designationSelect.add(option);
+                });
+                designationBox.style.display = "block"; // Show Designation input
+            } else {
+                designationBox.style.display = "none"; // Hide Designation input if no valid department is selected
+            }
+        }
+        
+        // Call showDesignation on page load to handle any pre-selected department
+        document.addEventListener('DOMContentLoaded', function() {
+            showDesignation();
+        });
+
+        function handleSubmit() {
+            var workDescription = document.getElementById("workDescription").value;
+            var defaultText = "This is the Work, I Have done in this period of time.";
+            
+            // If the textarea is empty, set it to the default text
+            if (workDescription.trim() === "") {
+                document.getElementById("workDescription").value = defaultText;
+            }
+
+            // Allow the form to be submitted
+            return true;
+        }
+    </script>
+</body>
+</html>

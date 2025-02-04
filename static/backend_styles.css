@@ -1,0 +1,291 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: #bab7b7;
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    max-width: 800px;
+    padding: 20px;
+}
+
+.login {
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: left;
+    display: block;
+    font-weight: bold;
+    font-size: x-large;
+    margin-bottom: 20px;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    width: 100%;
+    max-width: 600px;
+    flex-direction: column;
+    gap: 20px;
+    background: #e3e3e3;
+    box-shadow: 16px 16px 32px #a9a6a6, -16px -16px 32px #a7a4a4;
+    border-radius: 8px;
+    padding: 30px 20px;
+}
+
+.inputBox {
+    position: relative;
+    width: 100%;
+}
+
+/* Input styling */
+.inputBox select,
+.inputBox input {
+    width: 100%;
+    padding: 12px;
+    outline: none;
+    border: 2px solid #000;
+    color: #000;
+    font-size: 1em;
+    background: #fff;
+    /*border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+    transition: 0.1s;
+    border-bottom-left-radius: 8px;*/
+    border-radius: 8px;
+}
+
+/* Style for the select when focused */
+/*.inputBox select:focus {
+    border-color: #000;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}*/
+
+/* Label (span) styling - initial placement */
+.inputBox span {
+    position: absolute;
+    left: 10px; /* Adjusted to be on the left corner */
+    top: 0;
+    transform: translateY(12px); /* Align with the middle of the input field */
+    pointer-events: none;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #000;
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 3px;
+}
+
+/* When input is valid or focused - move label to the top left corner */
+.inputBox input:valid~span,
+.inputBox input:focus~span,
+.inputBox select:valid~span,
+.inputBox select:focus~span {
+    transform: translateX(0px) translateY(-15px); /* Adjusted for top-left corner */
+    font-size: 0.8em;
+    padding: 5px 10px;
+    background: #000;
+    letter-spacing: 0.2em;
+    color: #fff;
+}
+
+.inputBox input:valid,
+.inputBox input:focus {
+    border: 2px solid #000;
+    border-radius: 8px;
+}
+
+input[list] {
+    display: block;
+    position: relative;
+    z-index: 10; /* Ensures it displays above other elements */
+}
+
+datalist {
+    position: absolute;
+    z-index: 20; /* Ensure visibility above other elements */
+}
+
+/* Button styling */
+.enter {
+    height: 45px;
+    width: 120px;
+    border-radius: 5px;
+    border: 2px solid #000;
+    cursor: pointer;
+    background-color: transparent;
+    transition: 0.5s;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.enter:hover {
+    background-color: #3948f3;
+    color: white;
+}
+
+/* Remember Me and Forgot Password */
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    width: 100%;
+    padding: 0 20px;
+    color: #000;
+}
+
+.remember-forgot label input {
+    accent-color: #000;
+    margin-right: 5px;
+}
+
+.remember-forgot a {
+    text-decoration: none;
+    color: #000;
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+    color: #333;
+}
+
+/* Register Link */
+.register-link {
+    font-size: 14px;
+    text-align: center;
+    color: #000;
+}
+
+.register-link a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+    color: #333;
+}
+
+.hint {
+    font-size: 14px;
+    color: #000;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Flex container for side-by-side Username and Mobile Number input fields */
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px; /* Adjust the space between the Username and Mobile fields */
+    width: 100%;
+}
+
+.flex-container .inputBox {
+    flex: 1; /* Ensure both inputs take equal space */
+}
+
+/* Task Scheduling Page styles */
+/* Hidden by default */
+#designationBox {
+    display: block;
+    width: 100%;
+}
+
+/* Show designation box when active */
+#designationBox.show {
+    display: block;
+}
+
+#designationBox.active {
+    display: block;
+}
+
+/* Style for select options */
+.inputBox select option {
+    padding: 12px;
+    background: #fff;
+    color: #000;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .card {
+        width: 100%; /* Ensure it takes full width on smaller screens */
+    }
+}
+
+
+/* Text area for Work Description */
+#workDescription {
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    color: #000;
+    background: transparent;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+    border-bottom-left-radius: 8px;
+    outline: none;
+    transition: 0.1s;
+    resize: vertical; /* Allows vertical resizing */
+    max-height: 1000px; /* Maximum height, allows up to 100 lines */
+}
+
+/* Flash message styling */
+.flash {
+    font-size: 14px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Success message styling */
+.flash.success {
+    color: green;
+}
+
+/* Error message styling */
+.flash.error {
+    color: red;
+}
+
+/* Additional styling for success/error messages positioning */
+.password-match {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.password-match.success {
+    color: green;
+}
+
+.password-match.error {
+    color: red;
+}

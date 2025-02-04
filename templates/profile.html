@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page | @Scihubss</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='profilestyle.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <!-- First Section: Profile Information -->
+
+        <!-- Flash Message -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    
+        <div class="profile-section">
+            <div class="left">
+                <!-- Profile Picture -->
+                <div class="profile-pic">
+                    <!-- Profile Picture -->
+                    <img src="{{ url_for('serve_profile_pic', filename=user.profile_pic) if user.profile_pic else url_for('static', filename='images/Default_img.jpg') }}" 
+                        alt="Profile Picture" 
+                        class="profile-img">
+                    <!-- Camera Icon -->
+                    <form method="POST" action="{{ url_for('upload_profile_pic') }}" enctype="multipart/form-data" id="profile-pic-form">
+                        <label for="upload-input" class="camera-icon">
+                            <i class='bx bxs-camera'></i>
+                        </label>
+                        <input type="file" name="profile_pic" id="upload-input" accept="image/*" style="display: none;">
+                        
+                        <!-- Save Changes Button -->
+                        <button type="submit" id="save-changes-btn" class="btn-save" style="display: none;">Save Changes</button>
+                    </form>
+                </div>
+
+                <!-- User Details -->
+                <div class="user-details">
+                    <h2>{{ user.username }}</h2>
+                    <p>Email: {{ user.email }}</p>
+                    <p>Mobile: {{ user.mobile }}</p>
+                </div>
+            </div>
+
+            <div class="right">
+                <!-- Login Status -->
+                <div class="login-status">
+                    <h3>Last Login:</h3>
+                    <p>{{ user.last_login.strftime('%Y-%m-%d %H:%M:%S') if user.last_login else 'Never logged in' }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Section: Task Submissions Table -->
+        <div class="tasks-section">
+            <h2>Task Submissions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th> <!-- Renamed column for sequential numbering -->
+                        <th>Department</th>
+                        <th>Designation</th>
+                        <th>Task</th>
+                        <th>From Date</th>
+                        <th>From Time</th>
+                        <th>To Date</th>
+                        <th>To Time</th>
+                        <th>Work Description</th>
+                        <th>File Path</th>
+                        <th>Remove Submission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in user.schedules %}
+                    <tr>
+                        <td>{{ loop.index }}</td> <!-- Use loop.index for numbering -->
+                        <td>{{ task.department }}</td>
+                        <td>{{ task.designation }}</td>
+                        <td>{{ task.task }}</td>
+                        <td>{{ task.from_date }}</td>
+                        <td>{{ task.from_time }}</td>
+                        <td>{{ task.to_date }}</td>
+                        <td>{{ task.to_time }}</td>
+                        <td>{{ task.work_discription }}</td>
+                        <td>{% if task.file_path %}
+                            <a href="{{ url_for('static', filename='uploads/files/' + task.file_path) }}" 
+                               target="_blank"
+                               title="Download File">
+                                <i class='bx bx-download'></i> Download
+                            </a>
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        
+                        </td>
+                        <td>
+                            <form action="{{ url_for('remove_submission', task_id=task.id) }}" method="POST">
+                                <button type="submit" class="btn btn-danger">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const uploadInput = document.getElementById('upload-input');
+        const saveChangesBtn = document.getElementById('save-changes-btn');
+        const profileImg = document.querySelector('.profile-img');
+    
+        uploadInput.addEventListener('change', function (event) {
+            if (event.target.files.length > 0) {
+                const file = event.target.files[0];
+                // Add file type validation
+                const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                if (!allowedTypes.includes(file.type)) {
+                    alert('Please select a valid image file (JPEG, PNG, or GIF)');
+                    event.target.value = ''; // Clear the input
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function () {
+                    profileImg.src = reader.result; // Update the profile picture preview
+                    saveChangesBtn.style.display = 'block'; // Show "Save Changes" button
+                };
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        });
+    </script>
+        
+</body>
+</html>

@@ -24,7 +24,7 @@ else:
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # MySQL database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Mano_2004@localhost/Scihubss'  # Adjust the username, password, and database name
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://user:password@localhost/DatabaseName'  # Adjust the username, password, and database name
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join(BASE_DIR, 'static', 'uploads', 'files')
 app.config['UPLOAD_FOLDER1'] = os.path.join(BASE_DIR, 'static', 'uploads', 'profile_pics')
@@ -32,8 +32,8 @@ app.config['UPLOAD_FOLDER1'] = os.path.join(BASE_DIR, 'static', 'uploads', 'prof
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # Or your mail server
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'scihubss@gmail.com'  # Replace with your email
-app.config['MAIL_PASSWORD'] = 'elhv gjel zvrh eess'     # Replace with your app password
+app.config['MAIL_USERNAME'] = 'Auth-ProfileSync@gmail.com'  # Replace with your email
+app.config['MAIL_PASSWORD'] = 'app_password'     # Replace with your app password
 mail = Mail(app)
 
 # Store OTPs temporarily (in production, use Redis or a database)
